@@ -1,0 +1,68 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+android {
+    namespace = "com.example.weatherapp"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.example.weatherapp"
+        minSdk = 26
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", "\"${property("API_KEY")}\"")
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_19
+        targetCompatibility = JavaVersion.VERSION_19
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_19.toString()
+    }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
+}
+
+dependencies {
+    //Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons)
+    //Navigation
+    implementation(libs.navigation.compose)
+    //Hilt Navigation Compose
+    implementation(libs.hilt.navigation.compose)
+    //Hilt
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    //Serialization
+    implementation(libs.serialization)
+    implementation(libs.timber)
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.gson)
+    implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.coil)
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.material3)
+    implementation(libs.lottie)
+}

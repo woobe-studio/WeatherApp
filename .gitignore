@@ -7,15 +7,10 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-/.idea/misc.xml
-/.idea/vcs.xml
-/.idea/**/gradle.xml
-/.idea/gradle.xml
-/.idea/kotlinc.xml
-/.idea/inspectionProfiles/Project_Default.xml
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+app/google-services.json
