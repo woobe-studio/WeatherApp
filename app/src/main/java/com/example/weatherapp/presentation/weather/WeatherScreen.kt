@@ -20,6 +20,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
@@ -437,7 +438,7 @@ fun DefaultAppBar(
                 onClick = { navigateToProfile() }
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Close,
+                    imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.back_to_profile),
                 )
             }
