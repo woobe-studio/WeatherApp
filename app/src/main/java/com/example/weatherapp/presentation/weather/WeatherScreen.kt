@@ -72,6 +72,7 @@ import kotlin.random.Random
 fun WeatherScreen(
     modifier: Modifier = Modifier,
     viewModel: WeatherViewModel = hiltViewModel(),
+    navigateToProfile: () -> Unit
 ) {
     val searchWidgetState by viewModel.searchWidgetState
     val searchTextState by viewModel.searchTextState
@@ -80,6 +81,7 @@ fun WeatherScreen(
     Scaffold(
         topBar = {
             WeatherTopAppBar(
+                navigateToProfile = navigateToProfile,
                 searchWidgetState = searchWidgetState,
                 searchTextState = searchTextState,
                 onTextChange = { viewModel.updateSearchTextState(it) },
@@ -386,6 +388,7 @@ fun WeatherScreenContentPreview() {
 
 @Composable
 fun WeatherTopAppBar(
+    navigateToProfile: () -> Unit,
     searchWidgetState: SearchWidgetState,
     searchTextState: String,
     onTextChange: (String) -> Unit,
@@ -396,6 +399,7 @@ fun WeatherTopAppBar(
     when (searchWidgetState) {
         SearchWidgetState.CLOSED -> {
             DefaultAppBar(
+                navigateToProfile = navigateToProfile,
                 onSearchClicked = onSearchTriggered
             )
         }
@@ -413,7 +417,10 @@ fun WeatherTopAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DefaultAppBar(onSearchClicked: () -> Unit) {
+fun DefaultAppBar(
+    navigateToProfile: () -> Unit,
+    onSearchClicked: () -> Unit
+) {
     TopAppBar(
         title = {
             Text(
@@ -426,6 +433,14 @@ fun DefaultAppBar(onSearchClicked: () -> Unit) {
             titleContentColor = MaterialTheme.colorScheme.onBackground,
         ),
         actions = {
+            IconButton(
+                onClick = { navigateToProfile() }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = stringResource(R.string.back_to_profile),
+                )
+            }
             IconButton(
                 onClick = { onSearchClicked() }
             ) {
@@ -511,7 +526,8 @@ fun SearchAppBar(
 @Composable
 @Preview
 fun DefaultAppBarPreview() {
-    DefaultAppBar(onSearchClicked = {})
+    DefaultAppBar(navigateToProfile = {},
+        onSearchClicked = {})
 }
 
 @Composable

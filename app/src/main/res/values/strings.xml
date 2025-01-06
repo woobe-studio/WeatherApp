@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="back_to_profile">Back to Profile</string>
+
     <!-- Buttons -->
     <string name="sign_in_button">Sign in</string>
     <string name="reset_password_button">Reset</string>

@@ -54,7 +54,9 @@ fun NavGraph(
             )
         }
         composable<Route.Weather> {
-            WeatherScreen()
+            WeatherScreen(
+                navigateToProfile = { navController.navigate(Route.Profile) }
+            )
         }
 
     }
