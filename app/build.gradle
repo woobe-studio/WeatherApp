@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.example.weatherapp"
-    compileSdk = 34
+    compileSdk 35
 
     defaultConfig {
         applicationId = "com.example.weatherapp"
         minSdk = 26
-        targetSdk = 34
+        targetSdk 35
         versionCode = 1
         versionName = "1.0"
 
@@ -24,8 +24,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_19
-        targetCompatibility = JavaVersion.VERSION_19
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_19.toString()

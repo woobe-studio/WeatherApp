@@ -17,8 +17,8 @@ fun ActionText(
             onActionTextClick()
         },
         text = stringResource(
-            id = resourceId
+            id = resourceId,
         ),
-        fontSize = 15.sp
+        fontSize = 15.sp,
     )
 }
