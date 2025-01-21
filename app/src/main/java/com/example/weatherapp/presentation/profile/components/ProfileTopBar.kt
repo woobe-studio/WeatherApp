@@ -15,7 +15,9 @@ import com.example.weatherapp.R
 @Composable
 fun ProfileTopBar(
     signOut: () -> Unit,
-    deleteUser: () -> Unit
+    deleteUser: () -> Unit,
+    isDarkTheme: Boolean,
+    toggleTheme: () -> Unit
 ) {
     var openMenu by remember { mutableStateOf(false) }
 
@@ -76,6 +78,20 @@ fun ProfileTopBar(
                         text = stringResource(
                             id = R.string.delete_user_item
                         )
+                    )
+                }
+                DropdownMenuItem(
+                    onClick = {
+                        toggleTheme()
+                        openMenu = !openMenu
+                    }
+                ) {
+                    Text(
+                        text = if (isDarkTheme) {
+                            stringResource(id = R.string.light_theme_item)
+                        } else {
+                            stringResource(id = R.string.dark_theme_item)
+                        }
                     )
                 }
             }

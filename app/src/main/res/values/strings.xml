@@ -2,6 +2,9 @@
     <string name="app_name">WeatherApp</string>
     <string name="back_to_profile">Back to Profile</string>
 
+    <string name="light_theme_item">Light Theme</string>
+    <string name="dark_theme_item">Dark Theme</string>
+
     <!-- Buttons -->
     <string name="sign_in_button">Sign in</string>
     <string name="reset_password_button">Reset</string>

@@ -1,7 +1,7 @@
 package com.example.weatherapp.presentation.weather
 
 import com.example.weatherapp.core.Result
-
+import com.example.weatherapp.core.PreferencesHelper
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val repository: WeatherRepository,
+    private val preferencesHelper: PreferencesHelper // Inject PreferencesHelper
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<WeatherUiState> =
@@ -44,10 +45,14 @@ class WeatherViewModel @Inject constructor(
     }
 
     init {
-        getWeather()
+        // Load the saved city or use default if not found
+        val savedCity = preferencesHelper.getCity() ?: DEFAULT_WEATHER_DESTINATION
+        getWeather(savedCity)
     }
 
     fun getWeather(city: String = DEFAULT_WEATHER_DESTINATION) {
+        // Save the city to preferences
+        saveCityToPreferences(city)
         repository.getWeatherForecast(city).map { result ->
             when (result) {
                 is Result.Success -> {
@@ -65,4 +70,7 @@ class WeatherViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    fun saveCityToPreferences(city: String) {
+        preferencesHelper.saveCity(city)
+    }
 }

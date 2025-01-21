@@ -1,15 +1,14 @@
 package com.example.weatherapp.presentation.profile
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarResult
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
@@ -19,11 +18,8 @@ import com.example.weatherapp.presentation.profile.components.ProfileTopBar
 import com.example.weatherapp.core.printError
 import com.example.weatherapp.core.showToastError
 import com.example.weatherapp.core.showToastMessage
-import com.example.weatherapp.domain.model.Response.Failure
-import com.example.weatherapp.domain.model.Response.Loading
-import com.example.weatherapp.domain.model.Response.Success
+import com.example.weatherapp.domain.model.Response.*
 import com.example.weatherapp.navigation.Route
-import com.example.weatherapp.navigation.Route.SignIn
 import com.example.weatherapp.presentation.profile.components.ProfileContent
 import com.example.weatherapp.presentation.profile.components.VerifyEmailContent
 
@@ -43,11 +39,12 @@ fun ProfileScreen(
     var isEmailVerified by remember { mutableStateOf(viewModel.isEmailVerified) }
     var reloadingUser by remember { mutableStateOf(false) }
     var deletingUser by remember { mutableStateOf(false) }
+    var isDarkTheme by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.getAuthState(
             navigateToSignInScreen = {
-                navigateAndClear(SignIn)
+                navigateAndClear(Route.SignIn)
             }
         )
     }
@@ -61,29 +58,38 @@ fun ProfileScreen(
                 deleteUser = {
                     viewModel.deleteUser()
                     deletingUser = true
-                }
+                },
+                isDarkTheme = isDarkTheme,
+                toggleTheme = { isDarkTheme = !isDarkTheme }
             )
         },
         scaffoldState = scaffoldState
     ) { innerPadding ->
-        if (isEmailVerified) {
-            ProfileContent(
-                innerPadding = innerPadding,
-                navigateToWeather = navigateToWeather
-            )
-        } else {
-            VerifyEmailContent(
-                innerPadding = innerPadding,
-                reloadUser = {
-                    viewModel.reloadUser()
-                    reloadingUser = true
-                }
-            )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(if (isDarkTheme) Color.Black else Color.White) // Dynamic background color
+        ) {
+            if (isEmailVerified) {
+                ProfileContent(
+                    innerPadding = innerPadding,
+                    navigateToWeather = navigateToWeather,
+                    isDarkTheme = isDarkTheme
+                )
+            } else {
+                VerifyEmailContent(
+                    innerPadding = innerPadding,
+                    reloadUser = {
+                        viewModel.reloadUser()
+                        reloadingUser = true
+                    }
+                )
+            }
         }
     }
 
     if (reloadingUser) {
-        when(val reloadUserResponse = viewModel.reloadUserResponse) {
+        when (val reloadUserResponse = viewModel.reloadUserResponse) {
             is Loading -> LoadingIndicator()
             is Success -> {
                 if (viewModel.isEmailVerified) {
@@ -112,7 +118,7 @@ fun ProfileScreen(
     }
 
     if (deletingUser) {
-        when(val deleteUserResponse = viewModel.deleteUserResponse) {
+        when (val deleteUserResponse = viewModel.deleteUserResponse) {
             is Loading -> LoadingIndicator()
             is Success -> {
                 showToastMessage(context, R.string.user_deleted_message)
