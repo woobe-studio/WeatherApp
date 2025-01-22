@@ -40,21 +40,21 @@ android {
 }
 
 dependencies {
-    //Compose
+    // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons)
-    //Navigation
+    // Navigation
     implementation(libs.navigation.compose)
-    //Hilt Navigation Compose
+    // Hilt Navigation Compose
     implementation(libs.hilt.navigation.compose)
-    //Hilt
+    // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
-    //Firebase
+    // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
-    //Serialization
+    // Serialization
     implementation(libs.serialization)
     implementation(libs.timber)
     implementation(libs.retrofit2)
@@ -65,4 +65,23 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.lottie)
+
+    // Google Maps SDK
+    implementation libs.play.services.maps  // Maps
+    implementation libs.play.services.location  // Location services
+
+    // Jetpack Compose Google Maps Integration (optional if you're using Jetpack Compose)
+    implementation libs.maps.compose
+
+    // Google Play services for location updates
+    implementation libs.play.services.location.v1800
+    implementation libs.accompanist.permissions
+    implementation libs.osmdroid.android
+    implementation libs.play.services.location
+    implementation libs.webkit
+
+
+    // Optional: For handling weather-related tile layers or data from APIs like OpenWeatherMap
+    // implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    // implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
