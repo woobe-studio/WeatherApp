@@ -31,7 +31,8 @@ const val SENSITIVE_OPERATION_MESSAGE = "This operation is sensitive and require
 fun ProfileScreen(
     viewModel: ProfileViewModel = hiltViewModel(),
     navigateAndClear: (Route) -> Unit,
-    navigateToWeather: () -> Unit
+    navigateToWeather: () -> Unit,
+    navigateToMap: () -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
@@ -74,6 +75,7 @@ fun ProfileScreen(
                 ProfileContent(
                     innerPadding = innerPadding,
                     navigateToWeather = navigateToWeather,
+                    navigateToMap = navigateToMap,
                     isDarkTheme = isDarkTheme
                 )
             } else {

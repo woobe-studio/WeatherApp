@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 fun ProfileContent(
     innerPadding: PaddingValues,
     navigateToWeather: () -> Unit,
+    navigateToMap: () -> Unit,
     isDarkTheme: Boolean
 ) {
     Column(
@@ -37,6 +38,10 @@ fun ProfileContent(
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = navigateToWeather) {
             Text(text = "Go to Weather")
+        }
+        Spacer(modifier = Modifier.height(16.dp)) // Add spacing between the buttons
+        Button(onClick = navigateToMap) {
+            Text(text = "Go to Map")
         }
     }
 }

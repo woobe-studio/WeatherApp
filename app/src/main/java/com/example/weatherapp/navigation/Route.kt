@@ -20,4 +20,7 @@ sealed interface Route {
 
     @Serializable
     object Weather : Route
+
+    @Serializable
+    object Map : Route
 }

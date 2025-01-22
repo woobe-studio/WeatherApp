@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">WeatherApp</string>
     <string name="back_to_profile">Back to Profile</string>
+    <string name="map_screen_title">Map Screen</string>
+    <string name="map_screen_content">This is the content of the Map Screen.</string>
+
 
     <string name="light_theme_item">Light Theme</string>
     <string name="dark_theme_item">Dark Theme</string>

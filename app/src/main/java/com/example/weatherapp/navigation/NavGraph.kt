@@ -16,6 +16,7 @@ import com.example.weatherapp.presentation.sign_up.SignUpScreen
 import com.example.weatherapp.presentation.splash.SplashScreen
 
 import com.example.weatherapp.presentation.weather.WeatherScreen
+import com.example.weatherapp.presentation.map.MapScreen
 
 @Composable
 fun NavGraph(
@@ -50,11 +51,17 @@ fun NavGraph(
         composable<Profile> {
             ProfileScreen(
                 navigateAndClear = navController::navigateAndClear,
-                navigateToWeather = { navController.navigate(Route.Weather) }
+                navigateToWeather = { navController.navigate(Route.Weather) },
+                navigateToMap = { navController.navigate(Route.Map) }
             )
         }
         composable<Route.Weather> {
             WeatherScreen(
+                navigateToProfile = { navController.navigate(Route.Profile) }
+            )
+        }
+        composable<Route.Map> {
+            MapScreen(
                 navigateToProfile = { navController.navigate(Route.Profile) }
             )
         }
