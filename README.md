@@ -1,4 +1,4 @@
-# WeatherApp
+# WeatherApp (5th semester, late 2024)
 
 WeatherApp is a modern mobile application built with **Android Studio** using **Jetpack Compose**.  
 It enables users to track the weather in real time with a seamless and intuitive experience.
